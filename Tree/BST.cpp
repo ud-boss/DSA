@@ -324,6 +324,35 @@ public:
         for(auto it=M.begin();it!=M.end();it++)
             cout<<it->second<<" ";
      }
+
+     void zigZag()
+     {
+         if(root == NULL)
+            return;
+         queue<Node *> Q;
+         Q.push(root);
+         bool flag = true;
+         while(!Q.empty())
+         {
+             int level = Q.size();
+             vector<int> temp(level);
+             for(int i=0;i<level;i++)
+             {
+                 Node *curr = Q.front();
+                 Q.pop();
+                 int index = flag ? i : level-i-1;
+                 temp[index] = curr->val;
+                 if(curr->left)
+                    Q.push(curr->left);
+                 if(curr->right)
+                    Q.push(curr->right);
+             }
+             for(int i=0;i<temp.size();i++)
+                cout<<temp[i]<<" ";
+             cout<<endl;
+             flag = !flag;
+         }
+     }
 };
 
 int main()
@@ -337,22 +366,6 @@ int main()
     }
     t.Level();
     t.NewLine();
-    t.InOrderMorris();
-    t.NewLine();
-    t.InorderStack();
-    t.NewLine();
-    t.PreOrder();
-    t.NewLine();
-    t.PreOrderMorris();
-    t.NewLine();
-    t.PostOrderOneStack();
-    t.NewLine();
-    t.PostOrder();
-    t.NewLine();
-    t.LeftView();
-    t.NewLine();
-    t.RightView();
-    t.NewLine();
-    t.topView();
+    t.zigZag();
     return 0;
 }
